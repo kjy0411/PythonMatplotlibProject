@@ -170,3 +170,22 @@ plt.xticks(rotation=270)
 plt.show()
 """
 # 7) 리콜 사유 => WorldCloud => 제외하는 문자열 STOPWORD
+#print(df['case'])
+# 제외하는 글자
+set(STOPWORDS)
+swords=set(["동안","인하여","있는","경우","있습니다","기능성이","가","에","가","이","인하여","오류로","않을 수","인해","및","않아"])
+text=''
+# 중복 제거 drop_duplicates()
+for word in df.case.drop_duplicates():
+    text+=word
+#print(text[:100])
+# 폰트 미설정시 => 글자가 깨진다
+font_path="c:/pydata/NanumGothic.ttf"
+# 뉴스 / 댓글분석 => 데이터마이닝
+wc=WordCloud(max_font_size=200,background_color="white",width=800,height=800,font_path=font_path,stopwords=swords)
+wc.generate(text)
+plt.figure(figsize=(10,8))
+plt.imshow(wc)
+plt.tight_layout(pad=0)
+plt.axis('off')
+plt.show()
